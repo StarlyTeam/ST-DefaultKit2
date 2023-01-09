@@ -1,0 +1,16 @@
+name: ST-DefaultKit
+main: net.starly.defaultkit.DefaultKitMain
+author: Starly Team
+website: https://discord.gg/TF8jqSJjCG
+
+description: DefaultKit Plugin.
+
+api-version: 1.16
+version: 1.0
+
+softdepend:
+  - ST-Core
+
+commands:
+  defaultkit:
+    aliases: [ dk, 기본템 ]
