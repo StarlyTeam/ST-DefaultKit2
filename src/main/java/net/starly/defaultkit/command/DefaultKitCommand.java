@@ -2,6 +2,7 @@ package net.starly.defaultkit.command;
 
 import net.starly.defaultkit.data.DefaultKitData;
 import net.starly.defaultkit.data.PlayerDefaultKitData;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,6 +41,13 @@ public class DefaultKitCommand implements CommandExecutor {
             new DefaultKitData().giveKit(p);
             data.setReceived(true);
             p.sendMessage(config.getMessage("messages.kit_received"));
+            if (config.getBoolean("messages.kit_received.title.enabled")) {
+                p.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
+                        ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.subtitle")),
+                        config.getInt("messages.kit_received.title.fade_in") * 20,
+                        config.getInt("messages.kit_received.title.stay") * 20,
+                        config.getInt("messages.kit_received.title.fade_out") * 20);
+            }
             p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
             return true;

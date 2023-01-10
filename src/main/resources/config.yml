@@ -14,7 +14,20 @@ messages:
 
 
   # 기본템을 지급 받았을 때
-  kit_received: "&a기본템을 지급 받았습니다."
+  kit_received:
+
+    # 메세지
+    message: "&a기본템을 지급 받았습니다."
+
+    # 타이틀
+    title:
+      enable: true
+
+      title: "&a기본템"
+      subtitle: "&f지급완료"
+      fadein: 0
+      stay: 3
+      fadeout: 0
 
   # 이미 기본템을 지급 받았을 때
   already_received: "&c당신은 이미 기본템을 지급 받았습니다."
