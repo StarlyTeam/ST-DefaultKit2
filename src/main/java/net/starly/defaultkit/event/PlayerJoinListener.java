@@ -2,6 +2,7 @@ package net.starly.defaultkit.event;
 
 import net.starly.defaultkit.data.DefaultKitData;
 import net.starly.defaultkit.data.PlayerDefaultKitData;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,5 +30,6 @@ public class PlayerJoinListener implements Listener {
         new DefaultKitData().giveKit(p);
         data.setReceived(true);
         p.sendMessage(config.getMessage("messages.kit_received"));
+        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
     }
 }

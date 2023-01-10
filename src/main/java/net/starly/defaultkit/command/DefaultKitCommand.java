@@ -2,6 +2,7 @@ package net.starly.defaultkit.command;
 
 import net.starly.defaultkit.data.DefaultKitData;
 import net.starly.defaultkit.data.PlayerDefaultKitData;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,6 +40,7 @@ public class DefaultKitCommand implements CommandExecutor {
             new DefaultKitData().giveKit(p);
             data.setReceived(true);
             p.sendMessage(config.getMessage("messages.kit_received"));
+            p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
             return true;
         }
