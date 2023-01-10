@@ -19,8 +19,9 @@ public class PlayerJoinListener implements Listener {
         if (!config.getBoolean("settings.enable_auto_kit")) return;
 
         Player p = e.getPlayer();
-        PlayerDefaultKitData data = new PlayerDefaultKitData(p);
+        if (!p.hasPermission("starly.defaultkit." + config.getString("settings.auto_kit_permission"))) return;
 
+        PlayerDefaultKitData data = new PlayerDefaultKitData(p);
         if (data.isReceived()) return;
         if (Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).toList().size() != 0) {
             p.sendMessage(config.getMessage("messages.inventory_not_empty"));
