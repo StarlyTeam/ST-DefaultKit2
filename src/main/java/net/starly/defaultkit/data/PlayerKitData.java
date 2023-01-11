@@ -4,10 +4,10 @@ import net.starly.core.data.Config;
 import net.starly.defaultkit.DefaultKitMain;
 import org.bukkit.entity.Player;
 
-public class PlayerDefaultKitData {
+public class PlayerKitData {
     private final Config config;
 
-    public PlayerDefaultKitData(Player player) {
+    public PlayerKitData(Player player) {
         this.config = new Config("data/" + player.getUniqueId(), DefaultKitMain.getPlugin());
 
         if (config.getObject("received") == null) config.setBoolean("received", false);

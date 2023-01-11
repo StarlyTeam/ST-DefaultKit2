@@ -14,12 +14,12 @@ public class DefaultKitCmdTabComplete implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
-            List<String> completion = new ArrayList<>();
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reload"))) completion.add("리로드");
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) completion.add("설정");
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) completion.add("초기화");
+            List<String> completions = new ArrayList<>();
+            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reload"))) completions.add("리로드");
+            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) completions.add("설정");
+            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) completions.add("초기화");
 
-            return completion;
+            return completions;
         }
 
         if (args.length == 2) {

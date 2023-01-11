@@ -1,7 +1,7 @@
 package net.starly.defaultkit.event;
 
 import net.starly.defaultkit.data.DefaultKitData;
-import net.starly.defaultkit.data.KitEditingList;
+import net.starly.defaultkit.data.KitEditorData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class InventoryCloseListener implements Listener {
     public void onClose(InventoryCloseEvent e) {
         Player p = (Player) e.getPlayer();
 
-        if (!KitEditingList.players.contains(p)) return;
+        if (!KitEditorData.players.contains(p)) return;
         if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) {
             p.sendMessage(config.getMessage("messages.no_permission"));
             return;
@@ -24,6 +24,6 @@ public class InventoryCloseListener implements Listener {
         new DefaultKitData().setKit(e.getInventory());
         p.sendMessage(config.getMessage("messages.kit_set"));
 
-        KitEditingList.players.remove(p);
+        KitEditorData.players.remove(p);
     }
 }

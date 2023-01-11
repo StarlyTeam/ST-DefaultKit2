@@ -5,6 +5,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KitEditingList {
+public class KitEditorData {
     public static List<Player> players = new ArrayList<>();
 }

@@ -2,12 +2,21 @@ package net.starly.defaultkit.data;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class DefaultKitData {
     public void giveKit(Player p) {
-        p.getInventory().setContents(config.getInventory("defaultkit").getContents());
+        p.getInventory().addItem(Arrays.stream(config.getInventory("defaultkit").getContents()).filter(Objects::nonNull).toArray(ItemStack[]::new));
+    }
+
+    public List<ItemStack> getKit() {
+        return Arrays.stream(config.getInventory("defaultkit").getContents()).filter(Objects::nonNull).toList();
     }
 
     public void setKit(Inventory inv) {

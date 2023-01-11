@@ -1,8 +1,8 @@
 package net.starly.defaultkit.command;
 
 import net.starly.defaultkit.data.DefaultKitData;
-import net.starly.defaultkit.data.KitEditingList;
-import net.starly.defaultkit.data.PlayerDefaultKitData;
+import net.starly.defaultkit.data.KitEditorData;
+import net.starly.defaultkit.data.PlayerKitData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
-public class DefaultKitCommand implements CommandExecutor {
+public class DefaultKitCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player p)) {
@@ -25,7 +25,7 @@ public class DefaultKitCommand implements CommandExecutor {
             return true;
         }
 
-        PlayerDefaultKitData data = new PlayerDefaultKitData(p);
+        PlayerKitData data = new PlayerKitData(p);
         if (args.length == 0) {
             if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.receive_kit"))) {
                 p.sendMessage(config.getMessage("messages.no_permission"));
@@ -35,20 +35,21 @@ public class DefaultKitCommand implements CommandExecutor {
                 p.sendMessage(config.getMessage("messages.already_received"));
                 return true;
             }
-            if (Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).toList().size() != 0) {
-                p.sendMessage(config.getMessage("messages.inventory_not_empty"));
+            if (36 - Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).toList().size() <
+                    new DefaultKitData().getKit().size()) {
+                p.sendMessage(config.getMessage("messages.inventory_no_space"));
                 return true;
             }
 
             new DefaultKitData().giveKit(p);
             data.setReceived(true);
             p.sendMessage(config.getMessage("messages.kit_received.message"));
-            if (config.getBoolean("messages.kit_received.title.enabled")) {
+            if (config.getBoolean("messages.kit_received.title.enable")) {
                 p.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
                         ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.subtitle")),
-                        config.getInt("messages.kit_received.title.fade_in") * 20,
+                        config.getInt("messages.kit_received.title.fadein") * 20,
                         config.getInt("messages.kit_received.title.stay") * 20,
-                        config.getInt("messages.kit_received.title.fade_out") * 20);
+                        config.getInt("messages.kit_received.title.fadeout") * 20);
             }
             p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
@@ -78,7 +79,7 @@ public class DefaultKitCommand implements CommandExecutor {
                 }
 
                 p.openInventory(config.getInventory("defaultkit"));
-                KitEditingList.players.add(p);
+                KitEditorData.players.add(p);
 
                 return true;
             }
@@ -99,7 +100,7 @@ public class DefaultKitCommand implements CommandExecutor {
                         return true;
                     }
 
-                    new PlayerDefaultKitData(target).setReceived(false);
+                    new PlayerKitData(target).setReceived(false);
                     p.sendMessage(config.getMessage("messages.reset", Map.of("{target}", target.getDisplayName())));
                     return true;
                 } else {
