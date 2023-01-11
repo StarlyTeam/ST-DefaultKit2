@@ -7,6 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class InventoryCloseListener implements Listener {
@@ -17,6 +20,10 @@ public class InventoryCloseListener implements Listener {
         if (!KitEditorData.players.contains(p)) return;
         if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) {
             p.sendMessage(config.getMessage("messages.no_permission"));
+            return;
+        }
+        if (Arrays.stream(e.getInventory().getContents()).filter(Objects::nonNull).toList().size() == 0) {
+            p.sendMessage(config.getMessage("messages.kit_cannot_empty"));
             return;
         }
 
