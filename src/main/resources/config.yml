@@ -12,6 +12,9 @@ messages:
   # 명령어를 위한 권한이 없을 때
   no_permission: "&c당신은 이 명령어를 사용할 권한이 없습니다."
 
+  # 플레이어가 없을 떄
+  no_player: "&c해당 플레이어를 찾을 수 없습니다."
+
 
   # 기본템을 지급 받았을 때
   kit_received:
@@ -38,6 +41,10 @@ messages:
   # 기본템을 설정했을 때
   kit_set: "&a기본템을 설정했습니다."
 
+  # 기본템 지급내역을 초기화 했을 때
+  # {target}  - 대상 플레이어
+  reset: "&a{target}님의 기본템 지급내역을 초기화 했습니다."
+
 
   # 콘피그를 리로드 완료했을 때
   reload: "&a콘피그를 리로드 완료했습니다."
@@ -63,15 +70,40 @@ permissions:
   # 기본템을 설정할 수 있는 권한
   set_kit: "set"
 
+  # 기본템 지급내역을 초기화할 수 있는 권한
+  reset: "reset"
+
 
 # 기본템 설정
 defaultkit:
-  size: 45
-  title: 'inv'
+  size: 36
+  title: "기본템 설정 | ST-DefaultKit"
   items:
     '0':
-      material: STONE
+      material: IRON_PICKAXE
       amount: 1
       durability: 0
-      meta:
-        displayName: "&6ST-DefaultKit &7(NEW)"
+    '1':
+      material: IRON_AXE
+      amount: 1
+      durability: 0
+    '2':
+      material: IRON_SWORD
+      amount: 1
+      durability: 0
+    '5':
+      material: CHAINMAIL_HELMET
+      amount: 1
+      durability: 0
+    '6':
+      material: CHAINMAIL_CHESTPLATE
+      amount: 1
+      durability: 0
+    '7':
+      material: CHAINMAIL_LEGGINGS
+      amount: 1
+      durability: 0
+    '8':
+      material: CHAINMAIL_BOOTS
+      amount: 1
+      durability: 0

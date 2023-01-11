@@ -4,6 +4,7 @@ import net.starly.core.bstats.Metrics;
 import net.starly.core.data.Config;
 import net.starly.defaultkit.command.DefaultKitCmdTabComplete;
 import net.starly.defaultkit.command.DefaultKitCommand;
+import net.starly.defaultkit.event.InventoryCloseListener;
 import net.starly.defaultkit.event.PlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +42,7 @@ public class DefaultKitMain extends JavaPlugin {
 
         // EVENT
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new InventoryCloseListener(), plugin);
     }
 
     public static JavaPlugin getPlugin() {

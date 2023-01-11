@@ -1,7 +1,9 @@
 package net.starly.defaultkit.command;
 
 import net.starly.defaultkit.data.DefaultKitData;
+import net.starly.defaultkit.data.KitEditingList;
 import net.starly.defaultkit.data.PlayerDefaultKitData;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -10,9 +12,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
-import static java.util.stream.Collectors.toList;
 import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class DefaultKitCommand implements CommandExecutor {
@@ -40,7 +42,7 @@ public class DefaultKitCommand implements CommandExecutor {
 
             new DefaultKitData().giveKit(p);
             data.setReceived(true);
-            p.sendMessage(config.getMessage("messages.kit_received"));
+            p.sendMessage(config.getMessage("messages.kit_received.message"));
             if (config.getBoolean("messages.kit_received.title.enabled")) {
                 p.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
                         ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.subtitle")),
@@ -75,10 +77,35 @@ public class DefaultKitCommand implements CommandExecutor {
                     return true;
                 }
 
-                new DefaultKitData().setKit(p.getInventory());
-                p.sendMessage(config.getMessage("messages.kit_set"));
+                p.openInventory(config.getInventory("defaultkit"));
+                KitEditingList.players.add(p);
 
                 return true;
+            }
+
+            case "초기화", "reset" -> {
+                if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) {
+                    p.sendMessage(config.getMessage("messages.no_permission"));
+                    return true;
+                }
+                if (args.length == 1) {
+                    data.setReceived(false);
+                    p.sendMessage(config.getMessage("messages.reset", Map.of("{target}", p.getDisplayName())));
+                    return true;
+                } else if (args.length == 2) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target == null) {
+                        p.sendMessage(config.getMessage("messages.no_player"));
+                        return true;
+                    }
+
+                    new PlayerDefaultKitData(target).setReceived(false);
+                    p.sendMessage(config.getMessage("messages.reset", Map.of("{target}", target.getDisplayName())));
+                    return true;
+                } else {
+                    p.sendMessage(config.getMessage("messages.wrong_command"));
+                    return true;
+                }
             }
 
             default -> {

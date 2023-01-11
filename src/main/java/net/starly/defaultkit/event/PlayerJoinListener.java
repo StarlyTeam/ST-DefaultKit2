@@ -31,7 +31,7 @@ public class PlayerJoinListener implements Listener {
 
         new DefaultKitData().giveKit(p);
         data.setReceived(true);
-        p.sendMessage(config.getMessage("messages.kit_received"));
+        p.sendMessage(config.getMessage("messages.kit_received.message"));
         if (config.getBoolean("messages.kit_received.title.enabled")) {
             p.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
                     ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.subtitle")),

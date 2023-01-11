@@ -11,7 +11,6 @@ public class DefaultKitData {
     }
 
     public void setKit(Inventory inv) {
-        config.setInventory("defaultkit", inv, "inv");
-        config.setInt("defaultkit.size", 45);
+        config.setInventory("defaultkit", inv, "기본템 설정 | ST-DefaultKit");
     }
 }
