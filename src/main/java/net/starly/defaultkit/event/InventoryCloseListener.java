@@ -18,6 +18,8 @@ public class InventoryCloseListener implements Listener {
         Player p = (Player) e.getPlayer();
 
         if (!KitEditorData.players.contains(p)) return;
+        KitEditorData.players.remove(p);
+
         if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) {
             p.sendMessage(config.getMessage("messages.no_permission"));
             return;
@@ -27,10 +29,7 @@ public class InventoryCloseListener implements Listener {
             return;
         }
 
-
         new DefaultKitData().setKit(e.getInventory());
         p.sendMessage(config.getMessage("messages.kit_set"));
-
-        KitEditorData.players.remove(p);
     }
 }
