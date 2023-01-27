@@ -60,23 +60,6 @@ settings:
   enable_auto_kit: true
 
 
-# 퍼미션 설정
-# 입력한 퍼미션 앞에 "starly.defaultkit."을 붙여 작동합니다.
-permissions:
-
-  # 콘피그를 리로드할 수 있는 권한
-  reload: "reload"
-
-  # 기본템을 지급받을 수 있는 권한
-  receive_kit: "receive"
-
-  # 기본템을 설정할 수 있는 권한
-  set_kit: "set"
-
-  # 기본템 지급내역을 초기화할 수 있는 권한
-  reset: "reset"
-
-
 # 기본템 설정
 defaultkit:
   size: 36

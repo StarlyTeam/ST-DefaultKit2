@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
@@ -24,7 +25,7 @@ public class PlayerJoinListener implements Listener {
 
         PlayerKitData data = new PlayerKitData(p);
         if (data.isReceived()) return;
-        if (36 - Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).toList().size() <
+        if (36 - (int) Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).count() <
                 new DefaultKitData().getKit().size()) {
             p.sendMessage(config.getMessage("messages.inventory_no_space"));
             return;

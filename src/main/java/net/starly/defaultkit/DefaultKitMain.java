@@ -2,7 +2,7 @@ package net.starly.defaultkit;
 
 import net.starly.core.bstats.Metrics;
 import net.starly.core.data.Config;
-import net.starly.defaultkit.command.DefaultKitCmdTabComplete;
+import net.starly.defaultkit.command.tabcomplete.DefaultKitTab;
 import net.starly.defaultkit.command.DefaultKitCmd;
 import net.starly.defaultkit.event.InventoryCloseListener;
 import net.starly.defaultkit.event.PlayerJoinListener;
@@ -37,7 +37,7 @@ public class DefaultKitMain extends JavaPlugin {
 
         // COMMAND
         Bukkit.getPluginCommand("defaultkit").setExecutor(new DefaultKitCmd());
-        Bukkit.getPluginCommand("defaultkit").setTabCompleter(new DefaultKitCmdTabComplete());
+        Bukkit.getPluginCommand("defaultkit").setTabCompleter(new DefaultKitTab());
 
 
         // EVENT

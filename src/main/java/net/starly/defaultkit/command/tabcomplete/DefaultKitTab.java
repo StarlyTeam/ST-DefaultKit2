@@ -1,16 +1,17 @@
-package net.starly.defaultkit.command;
+package net.starly.defaultkit.command.tabcomplete;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
-public class DefaultKitCmdTabComplete implements TabCompleter {
+public class DefaultKitTab implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
@@ -23,7 +24,7 @@ public class DefaultKitCmdTabComplete implements TabCompleter {
         }
 
         if (args.length == 2) {
-            if (List.of("초기화", "reset").contains(args[0].toLowerCase())) {
+            if (Arrays.asList("초기화", "reset").contains(args[0].toLowerCase())) {
                 if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) return null;
             }
         }

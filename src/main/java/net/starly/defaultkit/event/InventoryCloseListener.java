@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
@@ -24,7 +25,7 @@ public class InventoryCloseListener implements Listener {
             p.sendMessage(config.getMessage("messages.no_permission"));
             return;
         }
-        if (Arrays.stream(e.getInventory().getContents()).filter(Objects::nonNull).toList().size() == 0) {
+        if (Arrays.stream(e.getInventory().getContents()).filter(Objects::nonNull).collect(Collectors.toList()).size() == 0) {
             p.sendMessage(config.getMessage("messages.kit_cannot_empty"));
             return;
         }
