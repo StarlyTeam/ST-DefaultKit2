@@ -16,16 +16,16 @@ public class DefaultKitTab implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reload"))) completions.add("리로드");
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) completions.add("설정");
-            if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) completions.add("초기화");
+            if (sender.hasPermission("starly.defaultkit.reload")) completions.add("리로드");
+            if (sender.hasPermission("starly.defaultkit.set")) completions.add("설정");
+            if (sender.hasPermission("starly.defaultkit.reset")) completions.add("초기화");
 
             return completions;
         }
 
         if (args.length == 2) {
             if (Arrays.asList("초기화", "reset").contains(args[0].toLowerCase())) {
-                if (sender.hasPermission("starly.defaultkit." + config.getString("permissions.reset"))) return null;
+                if (sender.hasPermission("starly.defaultkit.reset")) return null;
             }
         }
 

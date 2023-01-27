@@ -21,10 +21,6 @@ public class InventoryCloseListener implements Listener {
         if (!KitEditorData.players.contains(p)) return;
         KitEditorData.players.remove(p);
 
-        if (!p.hasPermission("starly.defaultkit." + config.getString("permissions.set"))) {
-            p.sendMessage(config.getMessage("messages.no_permission"));
-            return;
-        }
         if (Arrays.stream(e.getInventory().getContents()).filter(Objects::nonNull).collect(Collectors.toList()).size() == 0) {
             p.sendMessage(config.getMessage("messages.kit_cannot_empty"));
             return;

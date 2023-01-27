@@ -89,16 +89,22 @@ public class DefaultKitCmd implements CommandExecutor {
 
             case "초기화":
             case "reset": {
-                if (!player.hasPermission("starly.defaultkit.reset")) {
-                    player.sendMessage(config.getMessage("messages.no_permission"));
-                    return true;
-                }
                 if (args.length == 1) {
+                    if (!player.hasPermission("starly.defaultkit.reset.self")) {
+                        player.sendMessage(config.getMessage("messages.no_permission"));
+                        return true;
+                    }
+
                     data.setReceived(false);
                     player.sendMessage(config.getMessage("messages.reset")
                             .replace("{target}", player.getDisplayName()));
                     return true;
                 } else if (args.length == 2) {
+                    if (!player.hasPermission("starly.defaultkit.reset.other")) {
+                        player.sendMessage(config.getMessage("messages.no_permission"));
+                        return true;
+                    }
+
                     Player target = Bukkit.getPlayer(args[1]);
                     if (target == null) {
                         player.sendMessage(config.getMessage("messages.no_player"));
