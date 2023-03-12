@@ -10,12 +10,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
+import static org.bukkit.Bukkit.getServer;
 
 public class DefaultKitCmd implements CommandExecutor {
     @Override
@@ -81,7 +83,9 @@ public class DefaultKitCmd implements CommandExecutor {
                     return true;
                 }
 
-                player.openInventory(config.getInventory("defaultkit"));
+                Inventory inv = getServer().createInventory(null, 36, "기본키트 설정 | ST-DefaultKit");
+                new DefaultKitData().getKit().forEach(inv::addItem);
+                player.openInventory(inv);
                 KitEditorData.players.add(player);
 
                 return true;

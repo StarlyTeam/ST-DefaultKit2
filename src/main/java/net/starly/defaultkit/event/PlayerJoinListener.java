@@ -17,30 +17,30 @@ import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class PlayerJoinListener implements Listener {
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerJoinEvent Event) {
         if (!config.getBoolean("settings.enable_auto_kit")) return;
 
-        Player p = e.getPlayer();
-        if (!p.hasPermission("starly.defaultkit.receive")) return;
+        Player player = Event.getPlayer();
+        if (!player.hasPermission("starly.defaultkit.receive")) return;
 
-        PlayerKitData data = new PlayerKitData(p);
+        PlayerKitData data = new PlayerKitData(player);
         if (data.isReceived()) return;
-        if (36 - (int) Arrays.stream(p.getInventory().getContents()).filter(Objects::nonNull).count() <
+        if (36 - (int) Arrays.stream(player.getInventory().getContents()).filter(Objects::nonNull).count() <
                 new DefaultKitData().getKit().size()) {
-            p.sendMessage(config.getMessage("messages.inventory_no_space"));
+            player.sendMessage(config.getMessage("messages.inventory_no_space"));
             return;
         }
 
-        new DefaultKitData().giveKit(p);
+        new DefaultKitData().giveKit(player);
         data.setReceived(true);
-        p.sendMessage(config.getMessage("messages.kit_received.message"));
+        player.sendMessage(config.getMessage("messages.kit_received.message"));
         if (config.getBoolean("messages.kit_received.title.enable")) {
-            p.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
+            player.sendTitle(ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.title")),
                     ChatColor.translateAlternateColorCodes('&', config.getString("messages.kit_received.title.subtitle")),
                     config.getInt("messages.kit_received.title.fadein") * 20,
                     config.getInt("messages.kit_received.title.stay") * 20,
                     config.getInt("messages.kit_received.title.fadeout") * 20);
         }
-        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
     }
 }

@@ -9,24 +9,23 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class InventoryCloseListener implements Listener {
     @EventHandler
-    public void onClose(InventoryCloseEvent e) {
-        Player p = (Player) e.getPlayer();
+    public void onClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
 
-        if (!KitEditorData.players.contains(p)) return;
-        KitEditorData.players.remove(p);
+        if (!KitEditorData.players.contains(player)) return;
+        KitEditorData.players.remove(player);
 
-        if (Arrays.stream(e.getInventory().getContents()).filter(Objects::nonNull).collect(Collectors.toList()).size() == 0) {
-            p.sendMessage(config.getMessage("messages.kit_cannot_empty"));
+        if (Arrays.stream(event.getInventory().getContents()).noneMatch(Objects::nonNull)) {
+            player.sendMessage(config.getMessage("messages.kit_cannot_empty"));
             return;
         }
 
-        new DefaultKitData().setKit(e.getInventory());
-        p.sendMessage(config.getMessage("messages.kit_set"));
+        new DefaultKitData().setKit(Arrays.asList(event.getInventory().getContents()));
+        player.sendMessage(config.getMessage("messages.kit_set"));
     }
 }

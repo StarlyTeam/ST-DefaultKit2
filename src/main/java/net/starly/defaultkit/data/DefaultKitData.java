@@ -1,10 +1,8 @@
 package net.starly.defaultkit.data;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,14 +11,14 @@ import static net.starly.defaultkit.DefaultKitMain.config;
 
 public class DefaultKitData {
     public void giveKit(Player p) {
-        p.getInventory().addItem(Arrays.stream(config.getInventory("defaultkit").getContents()).filter(Objects::nonNull).toArray(ItemStack[]::new));
+        getKit().forEach(p.getInventory()::addItem);
     }
 
     public List<ItemStack> getKit() {
-        return Arrays.stream(config.getInventory("defaultkit").getContents()).filter(Objects::nonNull).collect(Collectors.toList());
+        return config.getObjectList("defaultkit").stream().map(s -> (ItemStack) s).collect(Collectors.toList());
     }
 
-    public void setKit(Inventory inv) {
-        config.setInventory("defaultkit", inv, "기본템 설정 | ST-DefaultKit");
+    public void setKit(List<ItemStack> items) {
+        config.setObjectList("defaultkit", items.stream().filter(Objects::nonNull).map(s -> (Object) s).collect(Collectors.toList()));
     }
 }

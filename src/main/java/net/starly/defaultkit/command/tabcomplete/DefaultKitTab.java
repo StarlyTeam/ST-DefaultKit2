@@ -9,8 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static net.starly.defaultkit.DefaultKitMain.config;
-
 public class DefaultKitTab implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
