@@ -64,32 +64,4 @@ settings:
 defaultkit:
   size: 36
   title: "기본템 설정 | ST-DefaultKit"
-  items:
-    '0':
-      material: IRON_PICKAXE
-      amount: 1
-      durability: 0
-    '1':
-      material: IRON_AXE
-      amount: 1
-      durability: 0
-    '2':
-      material: IRON_SWORD
-      amount: 1
-      durability: 0
-    '5':
-      material: CHAINMAIL_HELMET
-      amount: 1
-      durability: 0
-    '6':
-      material: CHAINMAIL_CHESTPLATE
-      amount: 1
-      durability: 0
-    '7':
-      material: CHAINMAIL_LEGGINGS
-      amount: 1
-      durability: 0
-    '8':
-      material: CHAINMAIL_BOOTS
-      amount: 1
-      durability: 0
+  items: {}
