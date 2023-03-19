@@ -20,11 +20,6 @@ public class InventoryCloseListener implements Listener {
         if (!KitEditorData.players.contains(player)) return;
         KitEditorData.players.remove(player);
 
-        if (Arrays.stream(event.getInventory().getContents()).noneMatch(Objects::nonNull)) {
-            player.sendMessage(config.getMessage("messages.kit_cannot_empty"));
-            return;
-        }
-
         new DefaultKitData().setKit(Arrays.asList(event.getInventory().getContents()));
         player.sendMessage(config.getMessage("messages.kit_set"));
     }

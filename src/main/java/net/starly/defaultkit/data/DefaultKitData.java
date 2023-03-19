@@ -3,6 +3,7 @@ package net.starly.defaultkit.data;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,6 +16,10 @@ public class DefaultKitData {
     }
 
     public List<ItemStack> getKit() {
+        if (config.getConfig().getList("defaultkit") == null) {
+            config.setObjectList("defaultkit", new ArrayList<>());
+        }
+
         return config.getObjectList("defaultkit").stream().map(s -> (ItemStack) s).collect(Collectors.toList());
     }
 
