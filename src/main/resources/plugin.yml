@@ -5,12 +5,12 @@ website: https://discord.gg/TF8jqSJjCG
 
 description: DefaultKit Plugin.
 
-version: 1.3.3
+version: 1.3.4
 api-version: 1.13
 
 softdepend:
   - ST-Core
 
 commands:
-  defaultkit:
+  default-kit:
     aliases: [ dk, 기본템 ]
