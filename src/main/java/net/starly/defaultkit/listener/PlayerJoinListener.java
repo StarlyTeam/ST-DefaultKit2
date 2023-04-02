@@ -1,4 +1,4 @@
-package net.starly.defaultkit.event;
+package net.starly.defaultkit.listener;
 
 import net.starly.defaultkit.data.DefaultKitData;
 import net.starly.defaultkit.data.PlayerKitData;
@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 

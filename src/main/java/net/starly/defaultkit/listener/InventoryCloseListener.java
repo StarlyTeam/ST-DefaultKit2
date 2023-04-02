@@ -1,4 +1,4 @@
-package net.starly.defaultkit.event;
+package net.starly.defaultkit.listener;
 
 import net.starly.defaultkit.data.DefaultKitData;
 import net.starly.defaultkit.data.KitEditorData;
@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 import static net.starly.defaultkit.DefaultKitMain.config;
 
