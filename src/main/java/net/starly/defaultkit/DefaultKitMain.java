@@ -4,9 +4,8 @@ import net.starly.core.bstats.Metrics;
 import net.starly.core.data.Config;
 import net.starly.defaultkit.command.tabcomplete.DefaultKitTab;
 import net.starly.defaultkit.command.DefaultKitCmd;
-import net.starly.defaultkit.event.InventoryCloseListener;
-import net.starly.defaultkit.event.PlayerJoinListener;
-import org.bukkit.Bukkit;
+import net.starly.defaultkit.listener.InventoryCloseListener;
+import net.starly.defaultkit.listener.PlayerJoinListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DefaultKitMain extends JavaPlugin {
@@ -16,10 +15,10 @@ public class DefaultKitMain extends JavaPlugin {
     @Override
     public void onEnable() {
         // DEPENDENCY
-        if (Bukkit.getPluginManager().getPlugin("ST-Core") == null) {
-            Bukkit.getLogger().warning("[" + plugin.getName() + "] ST-Core 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
-            Bukkit.getLogger().warning("[" + plugin.getName() + "] 다운로드 링크 : &fhttps://discord.gg/TF8jqSJjCG");
-            Bukkit.getPluginManager().disablePlugin(this);
+        if (!isPluginEnabled("net.starly.core.StarlyCore")) {
+            getServer().getLogger().warning("[" + getName() + "] ST-Core 플러그인이 적용되지 않았습니다! 플러그인을 비활성화합니다.");
+            getServer().getLogger().warning("[" + getName() + "] 다운로드 링크 : &fhttp://starly.kr/");
+            getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
@@ -36,16 +35,25 @@ public class DefaultKitMain extends JavaPlugin {
 
 
         // COMMAND
-        Bukkit.getPluginCommand("defaultkit").setExecutor(new DefaultKitCmd());
-        Bukkit.getPluginCommand("defaultkit").setTabCompleter(new DefaultKitTab());
+        getServer().getPluginCommand("default-kit").setExecutor(new DefaultKitCmd());
+        getServer().getPluginCommand("default-kit").setTabCompleter(new DefaultKitTab());
 
 
         // EVENT
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
-        Bukkit.getPluginManager().registerEvents(new InventoryCloseListener(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
+        getServer().getPluginManager().registerEvents(new InventoryCloseListener(), plugin);
     }
 
     public static JavaPlugin getPlugin() {
         return plugin;
+    }
+
+    private boolean isPluginEnabled(String path) {
+        try {
+            Class.forName(path);
+            return true;
+        } catch (NoClassDefFoundError ignored) {
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return false;
     }
 }
